@@ -32,13 +32,13 @@ The platform auto-seeds **60 Indian customers, 500 subscription failures, 100 in
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────┐
-│                React Frontend (MUI v6)           │
+┌─────────────────────────────────────────────────-------
+│                React Frontend (MUI v6)                │
 │  Dashboard · Cases · Escalations · Audit · Compliance │
-└───────────────────┬─────────────────────────────┘
+└───────────────────┬─────────────────────────────-------
                     │ REST + JWT
 ┌───────────────────▼─────────────────────────────┐
-│              FastAPI Backend (Python 3.11)       │
+│              FastAPI Backend (Python 3.11)      │
 │  /api/v1: auth · cases · metrics · audit · ...  │
 └──────┬────────────┬────────────┬────────────────┘
        │            │            │
@@ -231,19 +231,4 @@ GET  /api/v1/audit/{id}/verify   # Chain integrity check
 POST /api/v1/replay/start        # Trigger batch pipeline
 POST /api/v1/webhooks/razorpay   # Ingest failure events
 ```
-
----
-
-## ⚠️ Production Checklist
-
-- [ ] Set `MOCK_MODE=false`
-- [ ] Set real `ANTHROPIC_API_KEY`, `RAZORPAY_*`, Firebase config
-- [ ] Change `SECRET_KEY` to a cryptographically random value
-- [ ] Use Alembic for all DB changes (not `create_all`)
-- [ ] Enable HTTPS / TLS termination
-- [ ] Add rate limiting on webhook endpoint
-- [ ] Set up proper logging / error tracking (Sentry)
-
----
-
 *Built for Razorpay Hackathon 2026 · Track 03 · AI Revenue Recovery*
